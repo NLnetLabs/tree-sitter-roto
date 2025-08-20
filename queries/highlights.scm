@@ -1,6 +1,10 @@
 ; Identifiers
 
-(type_expr) @type
+(optional_type) @type
+(type_name) @type
+(unit) @type
+(never) @type
+(record_type) @type
 
 ; Identifier conventions
 
@@ -39,7 +43,7 @@
 "else" @keyword
 "filter" @keyword
 "filtermap" @keyword
-"function" @keyword
+"fn" @keyword
 "if" @keyword
 "import" @keyword
 ; "in" @keyword
@@ -56,6 +60,7 @@
 
 (string_literal) @string
 
+(unit_literal) @constant.builtin
 (boolean_literal) @constant.builtin
 (integer_literal) @constant.builtin
 (ipv4_literal) @constant.builtin

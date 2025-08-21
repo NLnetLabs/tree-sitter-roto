@@ -1,20 +1,36 @@
 ; Identifiers
 
+(identifier) @variable
+
+; Assume that uppercase names in paths are types
+((identifier) @type
+ (#match? @type "^[A-Z]"))
+
 (optional_type) @type
 (type_name) @type
-(unit) @type
-(never) @type
+(unit) @type.builtin
+(never) @type.builtin
 (record_type) @type
 
-; Identifier conventions
+(type_name (path ((identifier) @type.builtin))
+  (#match? @type.builtin "^(u8|u16|u32|u64|i8|i16|i32|i64|String|bool|Asn|IpAddr|Prefix)$"))
 
 ; Assume all-caps names are constants
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_]+$'"))
 
-; Assume that uppercase names in paths are types
-((identifier) @type
- (#match? @type "^[A-Z]"))
+; Function calls
+; Unfortunately, we can't really distinguish them from methods
+
+(call_expression
+  function: (path
+    (identifier) @function .))
+
+; Calling a function with an uppercase letter: it's an enum constructor
+(call_expression
+  function: (path
+    (identifier) @constructor .)
+  (#match? @constructor "^[A-Z]"))
 
 ; Function definitions
 
@@ -24,43 +40,82 @@
 
 (line_comment) @comment
 
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
-"<" @punctuation.bracket
-">" @punctuation.bracket
-
-":" @punctuation.delimiter
-"." @punctuation.delimiter
-"," @punctuation.delimiter
-";" @punctuation.delimiter
-
 (parameter (identifier) @variable.parameter)
 
-"accept" @keyword
-; "dep" @keyword
-"else" @keyword
-"filter" @keyword
-"filtermap" @keyword
-"fn" @keyword
-"if" @keyword
-"import" @keyword
+[
+  "*"
+  "="
+  "=="
+  "!="
+  "&&"
+  "|"
+  "||"
+  "-"
+  "+"
+  "/"
+  ">"
+  "<"
+  ">="
+  "<="
+  "?"
+] @operator
+
+[
+  "("
+  ")"
+  "{"
+  "}"
+  "<"
+  ">"
+  "["
+  "]"
+] @punctuation.bracket
+
+[
+  ":"
+  "."
+  ","
+  ";"
+  "->"
+] @punctuation.delimiter
+
+[
+  "accept"
+  "reject"
+  "return"
+] @keyword.control.return
+
+[    
+  "if"
+  "else"
+  "match"
+] @keyword.control.conditional
+
+"while" @keyword.control.repeat
+
+[
+  "filter"
+  "filtermap"
+  "fn"
+  "test"
+] @keyword.function
+
+"let" @keyword.storage
+"type" @keyword.storage.type
+
+"import" @keyword.control.import
+
 ; "in" @keyword
-"let" @keyword
-; "match" @keyword
-"not" @keyword
-; "pkg" @keyword
-"reject" @keyword
-"return" @keyword
+; "dep" @keyword
 ; "std" @keyword
 ; "super" @keyword
-"test" @keyword
-"type" @keyword
+; "pkg" @keyword
+
+"not" @keyword.operator
 
 (string_literal) @string
 
 (unit_literal) @constant.builtin
-(boolean_literal) @constant.builtin
-(integer_literal) @constant.builtin
-(ipv4_literal) @constant.builtin
+(boolean_literal) @constant.builtin.boolean
+(integer_literal) @constant.numeric.integer
+(ipv4_literal) @constant.numeric

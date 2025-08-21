@@ -1,0 +1,26 @@
+# checks whether ip addr is 0.0.0.0
+fn is_zero(x: IpAddr) -> bool {
+    x == 0.0.0.0
+}
+
+filtermap main(x: IpAddr) {
+    if is_zero(x) {
+        accept
+    } else {
+        reject
+    }
+}
+
+test is_zero_true {
+    if is_zero(1.1.1.1) {
+        reject
+    }
+    accept
+}
+
+test is_zero_false {
+    if not is_zero(0.0.0.0) {
+        reject
+    }
+    accept
+}

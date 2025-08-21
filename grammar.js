@@ -125,9 +125,9 @@ module.exports = grammar({
       ';'
     ),
 
-    path: $ => prec.left(7, seq(
+    path: $ => prec(10, choice(
       $.identifier,
-      repeat(seq('.', $.identifier)),
+      seq($.path, '.', $.identifier),
     )),
 
     _expression: $ => choice(
@@ -135,8 +135,8 @@ module.exports = grammar({
       $._literal,
       $.match_expression,
       $.call_expression,
-      $.access_expression,
       $.path,
+      $.access_expression,
       $.record_expression,
       $.typed_record_expression,
       // $.list_expr,
@@ -214,6 +214,7 @@ module.exports = grammar({
 
     match_arm: $ => seq(
       field('pattern', $.pattern),
+      optional(seq('|', $._expression)),
       '->',
       field('value', choice(
         seq($.block, optional(',')),
@@ -223,6 +224,7 @@ module.exports = grammar({
 
     last_match_arm: $ => seq(
       field('pattern', $.pattern),
+      optional(seq('|', $._expression)),
       '->',
       field('value', choice(
         seq($.block, optional(',')),

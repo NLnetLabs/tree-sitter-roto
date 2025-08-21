@@ -1,0 +1,11 @@
+fn foo() {
+    let a = free();
+    let b = Type.method();
+    let c = Type.Constructor();
+    let d = Constructor();
+
+    let e = foo.method();
+    let b = foo.Type.static_method();
+    let c = foo.Type.Constructor();
+    let d = foo.Constructor();
+}

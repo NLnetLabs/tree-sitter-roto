@@ -1,0 +1,284 @@
+======================
+Filtermap without args
+======================
+
+filtermap foo() {}
+
+---
+
+(source_file
+  (filtermap_item
+    (identifier)
+    (parameter_list)
+    (block)))
+
+======================
+Filtermap with one arg
+======================
+
+filtermap foo(x: i32) {}
+
+---
+
+(source_file
+  (filtermap_item
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))
+    (block)))
+
+===================
+Filter without args
+===================
+
+filter foo() {}
+
+---
+
+(source_file
+  (filtermap_item
+    (identifier)
+    (parameter_list)
+    (block)))
+
+===================
+Filter with one arg
+===================
+
+filter foo(x: i32) {}
+
+---
+
+(source_file
+  (filtermap_item
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))
+    (block)))
+
+===============================
+Function without arg and return
+===============================
+
+fn foo() {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block)))
+
+============================
+Function with arg and return
+============================
+
+fn foo(x: i32) -> i32 {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))
+    (type_name
+      (path
+        (identifier)))
+    (block)))
+
+======================
+Empty type declaration
+======================
+
+type Foo {}
+
+---
+
+(source_file
+  (record_item
+    (identifier)
+    (record_type)))
+
+===============
+Type with field
+===============
+
+type Foo {
+    x: i32
+}
+
+---
+
+(source_file
+  (record_item
+    (identifier)
+    (record_type
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))))
+
+==================
+Type with 2 fields
+==================
+
+type Foo {
+    x: i32,
+    y: i32
+}
+
+---
+
+(source_file
+  (record_item
+    (identifier)
+    (record_type
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier))))
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))))
+
+======================================
+Type with 2 fields and trailing comma
+======================================
+
+type Foo {
+    x: i32,
+    y: i32,
+}
+
+---
+
+(source_file
+  (record_item
+    (identifier)
+    (record_type
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier))))
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))))
+
+==========
+Empty test
+==========
+
+test foo {}
+
+---
+
+(source_file
+  (test_item
+    (identifier)
+    (block)))
+
+================
+Test with accept
+================
+
+test foo {
+    accept
+}
+
+---
+
+(source_file
+  (test_item
+    (identifier)
+    (block
+      (return_expression))))
+
+=============
+Simple import
+=============
+
+import foo;
+
+---
+
+(source_file
+  (import
+    (import_path
+      (identifier))))
+
+==============
+Import foo.bar
+==============
+
+import foo.bar;
+
+---
+
+(source_file
+  (import
+    (import_path
+      (identifier)
+      (identifier))))
+
+=================
+Import two things
+=================
+
+import foo.{bar, baz};
+
+---
+
+(source_file
+  (import
+    (import_path
+      (identifier)
+      (import_path_group
+        (import_path
+          (identifier))
+        (import_path
+          (identifier))))))
+
+==============
+Complex import
+==============
+
+import foo.{bar.fn1, baz.{fn2, fn3}};
+
+---
+
+(source_file
+  (import
+    (import_path
+      (identifier)
+      (import_path_group
+        (import_path
+          (identifier)
+          (identifier))
+        (import_path
+          (identifier)
+          (import_path_group
+            (import_path
+              (identifier))
+            (import_path
+              (identifier))))))))

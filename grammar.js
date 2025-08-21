@@ -17,6 +17,10 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
+  conflicts: $ => [
+    [$._expression, $.typed_record_expression],
+  ],
+
   rules: {
     source_file: $ => repeat($._declaration),
 
@@ -37,20 +41,33 @@ module.exports = grammar({
 
     import: $ => seq(
       'import',
-      $.path,
+      $.import_path,
       ';',
     ),
 
+    import_path: $ => seq(
+      $._import_path_part,
+      repeat(seq('.', $._import_path_part)),
+    ),
+
+    _import_path_part: $ => choice(
+      $.identifier,
+      $.import_path_group,
+    ),
+
+    import_path_group: $ => 
+      seq('{', trailingCommaSep($.import_path) ,'}'),
+
     parameter_list: $ => seq(
       '(',
-      commaSep($.parameter),
+      trailingCommaSep($.parameter),
       ')',
     ),
 
     parameter: $ => seq(
       $.identifier,
       ':',
-      $.type_expr,
+      $._type,
     ),
 
     filtermap_item: $ => seq(
@@ -61,10 +78,10 @@ module.exports = grammar({
     ),
 
     function_item: $ => seq(
-      'function',
+      'fn',
       field('name', $.identifier),
       field('parameters', $.parameter_list),
-      optional(seq('->', field("return_type", $.type_expr))),
+      optional(seq('->', field("return_type", $._type))),
       field('body', $.block),
     ),
 
@@ -80,25 +97,31 @@ module.exports = grammar({
       field('fields', $.record_type),
     ),
 
-    block: $ => seq(
+    block: $ => prec(2, seq(
       '{',
       repeat($._statement),
       optional($._expression),
       '}',
-    ),
+    )),
 
     _statement: $ => choice(
       $.import,
       prec(1, $.if_else_expression),
+      prec(1, $.match_expression),
+      prec(1, $.while_expression),
       $.let_statement,
       seq($._expression, ';'),
     ),
 
     let_statement: $ => seq(
       'let',
-      field("variable", $.identifier),
+      field('variable', $.identifier),
+      optional(seq(
+        ':',
+        field('type', $._type),
+      )),
       '=',
-      $._expression,
+      field('value', $._expression),
       ';'
     ),
 
@@ -110,17 +133,25 @@ module.exports = grammar({
     _expression: $ => choice(
       $.return_expression,
       $._literal,
-      // $.match_expr,
+      $.match_expression,
       $.call_expression,
       $.access_expression,
       $.path,
-      // $.record_expr,
-      // $.typed_record_expr,
+      $.record_expression,
+      $.typed_record_expression,
       // $.list_expr,
-      $.unary_expression,
+      $.negation_expression,
+      $.not_expression,
       $.binary_expression,
       $.if_else_expression,
+      $.while_expression,
       $.parentheses_expression,
+      $.question_expression,
+    ),
+
+    question_expression: $ => seq(
+      $._expression,
+      '?',
     ),
 
     return_expression: $ => prec.left(seq(
@@ -128,7 +159,12 @@ module.exports = grammar({
       optional($._expression),
     )),
 
-    unary_expression: $ => prec(5, seq(
+    negation_expression: $ => prec.left(3, seq(
+      '-',
+      $._expression,
+    )),
+
+    not_expression: $ => prec(5, seq(
       'not',
       $._expression,
     )),
@@ -148,31 +184,98 @@ module.exports = grammar({
       ))));
     },
 
-    if_else_expression: $ => prec(2, seq(
+    if_else_expression: $ => prec.right(seq(
       'if',
-      $._expression,
-      $.block,
-      optional(seq('else', choice($.block, $.if_else_expression))),
+      field('condition', $._expression),
+      field('consequence', $.block),
+      optional(field('alternative', seq('else', choice($.block, $.if_else_expression)))),
     )),
+
+    while_expression: $ => seq(
+      'while',
+      field('condition', $._expression),
+      field('body', $.block),
+    ),
+
+    match_expression: $ => seq(
+      'match',
+      field('value', $._expression),
+      field('body', $.match_block),
+    ),
+
+    match_block: $ => seq(
+      '{',
+      optional(seq(
+        repeat($.match_arm),
+        alias($.last_match_arm, $.match_arm),
+      )),
+      '}',
+    ),
+
+    match_arm: $ => seq(
+      field('pattern', $.pattern),
+      '->',
+      field('value', choice(
+        seq($.block, optional(',')),
+        seq($._expression, ','),
+      )),
+    ),
+
+    last_match_arm: $ => seq(
+      field('pattern', $.pattern),
+      '->',
+      field('value', choice(
+        seq($.block, optional(',')),
+        seq($._expression, optional(',')),
+      )),
+    ),
+
+    pattern: $ => seq(
+      $.path,
+      optional($.pattern_arguments),
+    ),
+
+    pattern_arguments: $ => seq(
+      '(',
+      trailingCommaSep($.identifier),
+      ')',
+    ),
 
     access_expression: $ => prec(7, seq($._expression, '.', $.identifier)),
 
     call_expression: $ => prec(6, seq(
       field("function", $._expression),
       '(',
-      commaSep($._expression),
+      trailingCommaSep($._expression),
       ')',
     )),
 
     parentheses_expression: $ => seq('(', $._expression, ')'),
 
+    typed_record_expression: $ => seq($.path, $.record_expression),
+    
+    record_expression: $ => seq(
+      '{',
+      trailingCommaSep($.record_field),
+      '}',
+    ),
+
+    record_field: $ => seq(
+      $.identifier,
+      ':',
+      $._expression,
+    ),
+
     _literal: $ => choice(
+      $.unit_literal,
       $.boolean_literal,
       $.integer_literal,
       $.ipv4_literal,
       // $.ipv6_literal,
       $.string_literal,
     ),
+
+    unit_literal: _ => seq('(', ')'),
 
     boolean_literal: _ => choice('true', 'false'),
 
@@ -186,37 +289,50 @@ module.exports = grammar({
       '"',
     )),
     
-    type_expr: $ => choice(
-      $.optional_type_expr,
-      $.path,
+    _type: $ => choice(
+      $.optional_type,
+      $.type_name,
       $.never,
       $.unit,
       $.record_type,
     ),
 
-    optional_type_expr: $ => seq($.type_expr, '?'),
+    type_name: $ => seq(
+      $.path,
+      optional(seq(
+        '[',
+        trailingCommaSep($._type),
+        ']',
+      ))
+    ),
+
+    optional_type: $ => seq($._type, '?'),
 
     never: $ => '!',
     unit: _ => token(seq('(', ')')),
     
     record_type: $ => seq(
       '{',
-      commaSep($.record_type_field),
+      trailingCommaSep($.record_type_field),
       '}',
     ),
 
     record_type_field: $ => seq(
       $.identifier,
       ':',
-      $.type_expr,
+      $._type,
     ),
   }
 });
 
+function trailingCommaSep(rule) {
+  return seq(commaSep(rule), optional(','));
+}
+
 function commaSep1(rule) {
-  return seq(rule, repeat(seq(',', rule)))
+  return seq(rule, repeat(seq(',', rule)));
 }
 
 function commaSep(rule) {
-  return optional(commaSep1(rule))
+  return optional(commaSep1(rule));
 }

@@ -1,0 +1,655 @@
+====
+Unit
+====
+
+fn foo() {
+    ()	
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (unit_literal))))
+
+=========
+Bool true
+=========
+
+fn foo() {
+    true
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (boolean_literal))))
+
+==========
+Bool false
+==========
+
+fn foo() {
+    false
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (boolean_literal))))
+
+=======
+Integer
+=======
+
+fn foo() {
+	5
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (integer_literal))))
+
+======
+String
+======
+
+fn foo() {
+	"hello world!"
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (string_literal))))
+
+====
+Path
+====
+
+fn foo() {
+	foo.bar
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (access_expression
+        (path
+          (identifier))
+        (identifier)))))
+
+=============
+Function call
+=============
+
+fn foo() {
+    bar()
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (call_expression
+        (path
+          (identifier))))))
+
+======================
+Function call with arg
+======================
+
+fn foo() {
+    bar(x)
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (call_expression
+        (path
+          (identifier))
+        (path
+          (identifier))))))
+
+=========================================
+Function call with arg and trailing comma
+=========================================
+
+fn foo() {
+    bar(x,)
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (call_expression
+        (path
+          (identifier))
+        (path
+          (identifier))))))
+
+===========================
+Function call with two args
+===========================
+
+fn foo() {
+    bar(x, y)
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (call_expression
+        (path
+          (identifier))
+        (path
+          (identifier))
+        (path
+          (identifier))))))
+
+===========
+Method call
+===========
+
+fn foo() {
+    bar.baz()
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (call_expression
+        (access_expression
+          (path
+            (identifier))
+          (identifier))))))
+
+========
+Question
+========
+
+fn foo() {
+    bar?
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (question_expression
+        (path
+          (identifier))))))
+
+===============
+Double question
+===============
+
+fn foo() {
+    bar??
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (question_expression
+        (question_expression
+          (path
+            (identifier)))))))
+
+====================
+Empty record literal
+====================
+
+fn foo() {
+	Foo {}
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (typed_record_expression
+        (path
+          (identifier))
+        (record_expression)))))
+
+==============
+Record literal
+==============
+
+fn foo() {
+	Foo { a: 5 }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (typed_record_expression
+        (path
+          (identifier))
+        (record_expression
+          (record_field
+            (identifier)
+            (integer_literal)))))))
+
+=============================
+Record literal trailing comma
+=============================
+
+fn foo() {
+	Foo { a: 5, }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (typed_record_expression
+        (path
+          (identifier))
+        (record_expression
+          (record_field
+            (identifier)
+            (integer_literal)))))))
+
+=============
+If expression
+=============
+
+fn foo() {
+    if true { 0 }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (if_else_expression
+        (boolean_literal)
+        (block
+          (integer_literal))))))
+
+====================
+If without semicolon
+====================
+
+fn foo() {
+    if true { 0 }
+    return
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (if_else_expression
+        (boolean_literal)
+        (block
+          (integer_literal)))
+      (return_expression))))
+
+=======
+If else
+=======
+
+fn foo() {
+    if true { 0 } else { 1 }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (if_else_expression
+        (boolean_literal)
+        (block
+          (integer_literal))
+        (block
+          (integer_literal))))))
+
+=====
+If if
+=====
+
+fn foo() {
+    if if foo { 5 } { 3 } else { 2 }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (if_else_expression
+        (if_else_expression
+          (path
+            (identifier))
+          (block
+            (integer_literal)))
+        (block
+          (integer_literal))
+        (block
+          (integer_literal))))))
+
+==========
+If else if
+==========
+
+fn foo() {
+  if foo { bar } else if baz { quox } else { quaz }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (if_else_expression
+        (path
+          (identifier))
+        (block
+          (path
+            (identifier)))
+        (if_else_expression
+          (path
+            (identifier))
+          (block
+            (path
+              (identifier)))
+          (block
+            (path
+              (identifier))))))))
+
+=====
+While
+=====
+
+fn foo() {
+  while 4 == 4 {}
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (while_expression
+        (binary_expression
+          (integer_literal)
+          (integer_literal))
+        (block)))))
+
+===============
+While with body
+===============
+
+fn foo() {
+  while true {
+      print("yay");
+      print("more yay!");
+  }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (while_expression
+        (boolean_literal)
+        (block
+          (call_expression
+            (path
+              (identifier))
+            (string_literal))
+          (call_expression
+            (path
+              (identifier))
+            (string_literal)))))))
+
+=======================
+While without semicolon
+=======================
+
+fn foo() {
+    while true {}
+    return
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (while_expression
+        (boolean_literal)
+        (block))
+      (return_expression))))
+
+=======================
+Match without semicolon
+=======================
+
+fn foo() {
+	match 5 {}
+    return
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (match_expression
+        (integer_literal)
+        (match_block))
+      (return_expression))))
+
+=====
+Match
+=====
+
+fn foo() {
+    match foo.is_cool() {
+        Foo(x) -> {}
+        Bar -> x,
+    }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (match_expression
+        (call_expression
+          (access_expression
+            (path
+              (identifier))
+            (identifier)))
+        (match_block
+          (match_arm
+            (pattern
+              (path
+                (identifier))
+              (pattern_arguments
+                (identifier)))
+            (block))
+          (match_arm
+            (pattern
+              (path
+                (identifier)))
+            (path
+              (identifier))))))))
+
+=============================
+Match arm with trailing comma
+=============================
+
+fn foo() {
+    match foo.is_cool() {
+        Foo(x,) -> {}
+        Bar -> x,
+    }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (match_expression
+        (call_expression
+          (access_expression
+            (path
+              (identifier))
+            (identifier)))
+        (match_block
+          (match_arm
+            (pattern
+              (path
+                (identifier))
+              (pattern_arguments
+                (identifier)))
+            (block))
+          (match_arm
+            (pattern
+              (path
+                (identifier)))
+            (path
+              (identifier))))))))
+
+==========
+Arithmetic
+==========
+
+fn foo() {
+    2 * 4 / 6 + 2 * 4 == 5 * 6
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (binary_expression
+              (integer_literal)
+              (integer_literal))
+            (integer_literal))
+          (binary_expression
+            (integer_literal)
+            (integer_literal)))
+        (binary_expression
+          (integer_literal)
+          (integer_literal))))))
+
+========
+Negation
+========
+
+fn foo() {
+  - 5 - 3
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (binary_expression
+        (negation_expression
+          (integer_literal))
+        (integer_literal)))))

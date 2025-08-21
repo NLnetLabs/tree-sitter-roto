@@ -1,0 +1,176 @@
+====
+Unit
+====
+
+fn foo() -> () {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (unit)
+    (block)))
+
+===
+i32
+===
+
+fn foo() -> i32 {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (type_name
+      (path
+        (identifier)))
+    (block)))
+
+====
+Name
+====
+
+fn foo() -> Bar {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (type_name
+      (path
+        (identifier)))
+    (block)))
+
+==============
+Name with arg
+==============
+
+fn foo() -> Bar[x] {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (type_name
+      (path
+        (identifier))
+      (type_name
+        (path
+          (identifier))))
+    (block)))
+
+================================
+Name with arg and trailing comma
+================================
+
+fn foo() -> Bar[x,] {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (type_name
+      (path
+        (identifier))
+      (type_name
+        (path
+          (identifier))))
+    (block)))
+
+================
+Name with 2 args
+================
+
+fn foo() -> Bar[x,y] {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (type_name
+      (path
+        (identifier))
+      (type_name
+        (path
+          (identifier)))
+      (type_name
+        (path
+          (identifier))))
+    (block)))
+
+===========
+Record type
+===========
+
+fn foo() -> { a: i32 } {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (record_type
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))
+    (block)))
+
+===============================
+Record type with trailing comma
+===============================
+
+fn foo() -> { a: i32, } {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (record_type
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))
+    (block)))
+
+=========================
+Record type with 2 fields
+=========================
+
+fn foo() -> { a: i32, b: bool } {}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (record_type
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier))))
+      (record_type_field
+        (identifier)
+        (type_name
+          (path
+            (identifier)))))
+    (block)))

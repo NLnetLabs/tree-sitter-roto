@@ -272,9 +272,11 @@ module.exports = grammar({
       $.unit_literal,
       $.boolean_literal,
       $.integer_literal,
+      $.float_literal,
       $.ipv4_literal,
-      // $.ipv6_literal,
+      $.ipv6_literal,
       $.string_literal,
+      $.asn_literal
     ),
 
     unit_literal: _ => seq('(', ')'),
@@ -283,13 +285,28 @@ module.exports = grammar({
 
     integer_literal: _ => /[0-9][0-9_]*/,
 
+    // tree-sitter-rust uses a custom lexer for floats, so we slightly simplify
+    // the grammar by requiring a digit after the period.
+    float_literal: _ => /[0-9][0-9_]*(\.[0-9]+([eE][+-]?[0-9_]*)?)/,
+
     ipv4_literal: _ => /[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*/,
+
+    ipv6_literal: $ => token.immediate(seq(
+      /[0-9A-Fa-f]*/,
+      ':',
+      /[0-9A-Fa-f]*/,
+      ':',
+      /[0-9A-Fa-f]*/,
+      repeat(seq(':', /[0-9A-Fa-f]/)),
+    )),
 
     string_literal: $ => token(seq(
       '"',
       /[^\"]*/,
       '"',
     )),
+
+    asn_literal: $ => /AS[0-9]+/,
     
     _type: $ => choice(
       $.optional_type,

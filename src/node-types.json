@@ -12,6 +12,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -21,6 +25,10 @@
         },
         {
           "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
           "named": true
         },
         {
@@ -37,6 +45,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -103,6 +115,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -115,6 +131,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -124,6 +144,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -239,6 +263,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -251,6 +279,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -260,6 +292,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -327,6 +363,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -336,6 +376,10 @@
         },
         {
           "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
           "named": true
         },
         {
@@ -352,6 +396,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -427,6 +475,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -439,6 +491,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -448,6 +504,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -510,6 +570,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -522,6 +586,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -531,6 +599,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -713,6 +785,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -725,6 +801,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -734,6 +814,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -886,6 +970,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -898,6 +986,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -907,6 +999,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -1003,6 +1099,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -1019,6 +1119,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -1028,6 +1132,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -1090,6 +1198,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1102,6 +1214,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -1111,6 +1227,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -1202,6 +1322,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -1214,6 +1338,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -1223,6 +1351,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -1290,6 +1422,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1302,6 +1438,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -1311,6 +1451,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -1377,6 +1521,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1389,6 +1537,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -1398,6 +1550,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -1545,6 +1701,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1557,6 +1717,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -1566,6 +1730,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -1685,6 +1853,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1697,6 +1869,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -1706,6 +1882,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -1787,6 +1967,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1796,6 +1980,10 @@
         },
         {
           "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
           "named": true
         },
         {
@@ -1812,6 +2000,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -1954,6 +2146,10 @@
           "named": true
         },
         {
+          "type": "asn_literal",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1966,6 +2162,10 @@
           "named": true
         },
         {
+          "type": "float_literal",
+          "named": true
+        },
+        {
           "type": "if_else_expression",
           "named": true
         },
@@ -1975,6 +2175,10 @@
         },
         {
           "type": "ipv4_literal",
+          "named": true
+        },
+        {
+          "type": "ipv6_literal",
           "named": true
         },
         {
@@ -2168,6 +2372,10 @@
             "named": true
           },
           {
+            "type": "asn_literal",
+            "named": true
+          },
+          {
             "type": "binary_expression",
             "named": true
           },
@@ -2180,6 +2388,10 @@
             "named": true
           },
           {
+            "type": "float_literal",
+            "named": true
+          },
+          {
             "type": "if_else_expression",
             "named": true
           },
@@ -2189,6 +2401,10 @@
           },
           {
             "type": "ipv4_literal",
+            "named": true
+          },
+          {
+            "type": "ipv6_literal",
             "named": true
           },
           {
@@ -2340,6 +2556,10 @@
     "named": false
   },
   {
+    "type": "asn_literal",
+    "named": true
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -2354,6 +2574,10 @@
   {
     "type": "filtermap",
     "named": false
+  },
+  {
+    "type": "float_literal",
+    "named": true
   },
   {
     "type": "fn",
@@ -2377,6 +2601,10 @@
   },
   {
     "type": "ipv4_literal",
+    "named": true
+  },
+  {
+    "type": "ipv6_literal",
     "named": true
   },
   {

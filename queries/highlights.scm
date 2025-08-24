@@ -70,8 +70,6 @@
   ")"
   "{"
   "}"
-  "<"
-  ">"
   "["
   "]"
 ] @punctuation.bracket

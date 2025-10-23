@@ -10,5 +10,8 @@
 (record_item
   fields: (record_type) @class.inside) @class.around
 
+(variant_item
+  fields: (record_type) @class.inside) @class.around
+
 (line_comment) @comment.inside
 (line_comment)+ @comment.around

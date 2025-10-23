@@ -35,6 +35,7 @@ module.exports = grammar({
       $.filtermap_item,
       $.function_item,
       $.record_item,
+      $.variant_item,
       $.test_item,
       $.import,
     ),
@@ -80,7 +81,6 @@ module.exports = grammar({
     function_item: $ => seq(
       'fn',
       field('name', $.identifier),
-      field('parameters', $.parameter_list),
       optional(seq('->', field("return_type", $._type))),
       field('body', $.block),
     ),
@@ -91,10 +91,45 @@ module.exports = grammar({
       field('body', $.block),
     ),
 
-    record_item: $ => seq(
-      'type',
+    variant_item: $ => seq(
+      'variant',
       field('name', $.identifier),
+      optional(field('parameters', $.type_parameters)),
+      field(
+        'constructors',
+        seq(
+          '{',
+          trailingCommaSep($.variant_constructor),
+          '}',
+        ),
+      ),
+    ),
+
+    variant_constructor: $ => seq(
+      field('name', $.identifier),
+      optional(
+        field(
+          'parameters',
+          seq(
+            '(',
+            trailingCommaSep($._type),
+            ')',
+          ),
+        ),
+      ),
+    ),
+
+    record_item: $ => seq(
+      'record',
+      field('name', $.identifier),
+      optional(field('parameters', $.type_parameters)),
       field('fields', $.record_type),
+    ),
+
+    type_parameters: $ => seq(
+      '[',
+      trailingCommaSep($.identifier),
+      ']',
     ),
 
     block: $ => prec(2, seq(

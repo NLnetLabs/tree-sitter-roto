@@ -9,3 +9,6 @@
 
 (record_item
   name: (identifier) @definition.type)
+
+(variant_item
+  name: (identifier) @definition.type)

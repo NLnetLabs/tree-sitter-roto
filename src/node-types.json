@@ -716,16 +716,6 @@
           }
         ]
       },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "parameter_list",
-            "named": true
-          }
-        ]
-      },
       "return_type": {
         "multiple": false,
         "required": false,
@@ -2080,6 +2070,16 @@
             "named": true
           }
         ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_parameters",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -2260,6 +2260,10 @@
         {
           "type": "test_item",
           "named": true
+        },
+        {
+          "type": "variant_item",
+          "named": true
         }
       ]
     }
@@ -2326,6 +2330,21 @@
     }
   },
   {
+    "type": "type_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "typed_record_expression",
     "named": true,
     "fields": {},
@@ -2348,6 +2367,108 @@
     "type": "unit_literal",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "variant_constructor",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "never",
+            "named": true
+          },
+          {
+            "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "record_type",
+            "named": true
+          },
+          {
+            "type": "type_name",
+            "named": true
+          },
+          {
+            "type": "unit",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "variant_item",
+    "named": true,
+    "fields": {
+      "constructors": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "variant_constructor",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_parameters",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "while_expression",
@@ -2624,6 +2745,10 @@
     "named": false
   },
   {
+    "type": "record",
+    "named": false
+  },
+  {
     "type": "reject",
     "named": false
   },
@@ -2644,12 +2769,12 @@
     "named": false
   },
   {
-    "type": "type",
-    "named": false
-  },
-  {
     "type": "unit",
     "named": true
+  },
+  {
+    "type": "variant",
+    "named": false
   },
   {
     "type": "while",

@@ -104,7 +104,8 @@
 ] @keyword.function
 
 "let" @keyword.storage
-"type" @keyword.storage.type
+"record" @keyword.storage.type
+"variant" @keyword.storage.type
 
 "import" @keyword.control.import
 

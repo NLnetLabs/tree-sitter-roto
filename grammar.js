@@ -30,7 +30,7 @@ module.exports = grammar({
       '#',
       token.immediate(prec(1, /.*/)),
     ),
-    
+
     _declaration: $ => choice(
       $.filtermap_item,
       $.function_item,
@@ -56,7 +56,7 @@ module.exports = grammar({
       $.import_path_group,
     ),
 
-    import_path_group: $ => 
+    import_path_group: $ =>
       seq('{', trailingCommaSep($.import_path) ,'}'),
 
     parameter_list: $ => seq(
@@ -81,6 +81,7 @@ module.exports = grammar({
     function_item: $ => seq(
       'fn',
       field('name', $.identifier),
+      field('parameters', $.parameter_list),
       optional(seq('->', field("return_type", $._type))),
       field('body', $.block),
     ),
@@ -97,12 +98,14 @@ module.exports = grammar({
       optional(field('parameters', $.type_parameters)),
       field(
         'constructors',
-        seq(
-          '{',
-          trailingCommaSep($.variant_constructor),
-          '}',
-        ),
+        $.variant_constructors,
       ),
+    ),
+
+    variant_constructors: $ => seq(
+      '{',
+      trailingCommaSep($.variant_constructor),
+      '}',
     ),
 
     variant_constructor: $ => seq(
@@ -174,12 +177,13 @@ module.exports = grammar({
       $.access_expression,
       $.record_expression,
       $.typed_record_expression,
-      // $.list_expr,
+      $.list_expression,
       $.negation_expression,
       $.not_expression,
       $.binary_expression,
       $.if_else_expression,
       $.while_expression,
+      $.for_expression,
       $.parentheses_expression,
       $.question_expression,
     ),
@@ -229,6 +233,14 @@ module.exports = grammar({
     while_expression: $ => seq(
       'while',
       field('condition', $._expression),
+      field('body', $.block),
+    ),
+
+    for_expression: $ => seq(
+      'for',
+      field('identifier', $.identifier),
+      'in',
+      field('expression', $._expression),
       field('body', $.block),
     ),
 
@@ -290,7 +302,7 @@ module.exports = grammar({
     parentheses_expression: $ => seq('(', $._expression, ')'),
 
     typed_record_expression: $ => seq($.path, $.record_expression),
-    
+
     record_expression: $ => seq(
       '{',
       trailingCommaSep($.record_field),
@@ -301,6 +313,12 @@ module.exports = grammar({
       $.identifier,
       ':',
       $._expression,
+    ),
+
+    list_expression: $ => seq(
+      '[',
+      trailingCommaSep($._expression),
+      ']',
     ),
 
     _literal: $ => choice(
@@ -342,7 +360,7 @@ module.exports = grammar({
     )),
 
     asn_literal: $ => /AS[0-9]+/,
-    
+
     _type: $ => choice(
       $.optional_type,
       $.type_name,
@@ -364,7 +382,7 @@ module.exports = grammar({
 
     never: $ => '!',
     unit: _ => token(seq('(', ')')),
-    
+
     record_type: $ => seq(
       '{',
       trailingCommaSep($.record_type_field),

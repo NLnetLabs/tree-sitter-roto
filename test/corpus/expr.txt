@@ -3,7 +3,7 @@ Unit
 ====
 
 fn foo() {
-    ()	
+    ()
 }
 
 ---
@@ -98,7 +98,7 @@ fn foo() {
     (identifier)
     (parameter_list)
     (block
-      (access_expression
+      (path
         (path
           (identifier))
         (identifier)))))
@@ -203,7 +203,7 @@ fn foo() {
     (parameter_list)
     (block
       (call_expression
-        (access_expression
+        (path
           (path
             (identifier))
           (identifier))))))
@@ -547,7 +547,7 @@ fn foo() {
     (block
       (match_expression
         (call_expression
-          (access_expression
+          (path
             (path
               (identifier))
             (identifier)))
@@ -586,7 +586,7 @@ fn foo() {
     (block
       (match_expression
         (call_expression
-          (access_expression
+          (path
             (path
               (identifier))
             (identifier)))
@@ -653,3 +653,53 @@ fn foo() {
         (negation_expression
           (integer_literal))
         (integer_literal)))))
+
+===============
+List expression
+===============
+
+fn foo() {
+    [1, 2, 3, 4]
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (list_expression
+      (integer_literal)
+      (integer_literal)
+      (integer_literal)
+      (integer_literal)))))
+
+========
+For loop
+========
+
+fn foo() {
+    for x in ["hello", "hi"] {
+        print(x);
+    }
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (for_expression
+      (identifier)
+      (list_expression
+        (string_literal)
+        (string_literal))
+      (block
+        (call_expression
+          (path
+            (identifier))
+          (path
+            (identifier))))))))

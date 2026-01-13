@@ -104,7 +104,7 @@ fn foo(x: i32) -> i32 {}
 Empty type declaration
 ======================
 
-type Foo {}
+record Foo {}
 
 ---
 
@@ -117,7 +117,7 @@ type Foo {}
 Type with field
 ===============
 
-type Foo {
+record Foo {
     x: i32
 }
 
@@ -137,7 +137,7 @@ type Foo {
 Type with 2 fields
 ==================
 
-type Foo {
+record Foo {
     x: i32,
     y: i32
 }
@@ -163,7 +163,7 @@ type Foo {
 Type with 2 fields and trailing comma
 ======================================
 
-type Foo {
+record Foo {
     x: i32,
     y: i32,
 }

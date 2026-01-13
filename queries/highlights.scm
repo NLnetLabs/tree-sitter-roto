@@ -88,12 +88,13 @@
   "return"
 ] @keyword.control.return
 
-[    
+[
   "if"
   "else"
   "match"
 ] @keyword.control.conditional
 
+"for" @keyword.control.repeat
 "while" @keyword.control.repeat
 
 [
@@ -109,7 +110,7 @@
 
 "import" @keyword.control.import
 
-; "in" @keyword
+"in" @keyword
 ; "dep" @keyword
 ; "std" @keyword
 ; "super" @keyword

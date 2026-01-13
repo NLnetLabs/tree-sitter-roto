@@ -7,5 +7,6 @@
 
 (let_statement (identifier) @local.definition)
 (parameter (identifier) @local.definition)
+(for_expression (identifier) @local.definition)
 
 (identifier) @local.reference

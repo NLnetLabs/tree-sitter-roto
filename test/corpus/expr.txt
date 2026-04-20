@@ -533,7 +533,7 @@ Match
 
 fn foo() {
     match foo.is_cool() {
-        Foo(x) -> {}
+        Foo(x) => {}
         Bar -> x,
     }
 }
@@ -572,7 +572,7 @@ Match arm with trailing comma
 
 fn foo() {
     match foo.is_cool() {
-        Foo(x,) -> {}
+        Foo(x,) => {}
         Bar -> x,
     }
 }

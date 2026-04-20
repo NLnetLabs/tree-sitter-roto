@@ -262,7 +262,7 @@ module.exports = grammar({
     match_arm: $ => seq(
       field('pattern', $.pattern),
       optional(seq('|', $._expression)),
-      '->',
+      '=>',
       field('value', choice(
         seq($.block, optional(',')),
         seq($._expression, ','),

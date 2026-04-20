@@ -27,7 +27,7 @@ module.exports = grammar({
     identifier: _ => /(r#)?[_\p{XID_Start}][_\p{XID_Continue}]*/,
 
     line_comment: $ => seq(
-      '#',
+      '//',
       token.immediate(prec(1, /.*/)),
     ),
 

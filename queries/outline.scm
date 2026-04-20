@@ -14,8 +14,8 @@
     "record" @context
     name: (_) @name) @item
 
-(variant_item
-    "variant" @context
+(enum_item
+    "enum" @context
     name: (_) @name) @item
 
 (test_item

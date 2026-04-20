@@ -705,6 +705,111 @@
     }
   },
   {
+    "type": "enum_constructor",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "never",
+            "named": true
+          },
+          {
+            "type": "optional_type",
+            "named": true
+          },
+          {
+            "type": "record_type",
+            "named": true
+          },
+          {
+            "type": "type_name",
+            "named": true
+          },
+          {
+            "type": "unit",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "enum_constructors",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "enum_constructor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_item",
+    "named": true,
+    "fields": {
+      "constructors": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enum_constructors",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_parameters",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "filtermap_item",
     "named": true,
     "fields": {
@@ -2624,6 +2729,10 @@
       "required": false,
       "types": [
         {
+          "type": "enum_item",
+          "named": true
+        },
+        {
           "type": "filtermap_item",
           "named": true
         },
@@ -2641,10 +2750,6 @@
         },
         {
           "type": "test_item",
-          "named": true
-        },
-        {
-          "type": "variant_item",
           "named": true
         }
       ]
@@ -2749,111 +2854,6 @@
     "type": "unit_literal",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "variant_constructor",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "never",
-            "named": true
-          },
-          {
-            "type": "optional_type",
-            "named": true
-          },
-          {
-            "type": "record_type",
-            "named": true
-          },
-          {
-            "type": "type_name",
-            "named": true
-          },
-          {
-            "type": "unit",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "variant_constructors",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "variant_constructor",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "variant_item",
-    "named": true,
-    "fields": {
-      "constructors": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "variant_constructors",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_parameters",
-            "named": true
-          }
-        ]
-      }
-    }
   },
   {
     "type": "while_expression",
@@ -3078,6 +3078,10 @@
     "named": false
   },
   {
+    "type": "enum",
+    "named": false
+  },
+  {
     "type": "false",
     "named": false
   },
@@ -3172,10 +3176,6 @@
   {
     "type": "unit",
     "named": true
-  },
-  {
-    "type": "variant",
-    "named": false
   },
   {
     "type": "while",

@@ -10,8 +10,8 @@
 (record_item
   fields: (record_type) @class.inside) @class.around
 
-(variant_item
-  constructors: (variant_constructors) @class.inside) @class.around
+(enum_item
+  constructors: (enum_constructors) @class.inside) @class.around
 
 (line_comment) @comment.inside
 (line_comment)+ @comment.around

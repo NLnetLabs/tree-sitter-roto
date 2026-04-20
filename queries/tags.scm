@@ -10,5 +10,5 @@
 (record_item
   name: (identifier) @definition.type)
 
-(variant_item
+(enum_item
   name: (identifier) @definition.type)

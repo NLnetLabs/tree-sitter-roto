@@ -51,7 +51,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "variant_item"
+          "name": "enum_item"
         },
         {
           "type": "SYMBOL",
@@ -386,12 +386,12 @@
         }
       ]
     },
-    "variant_item": {
+    "enum_item": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "variant"
+          "value": "enum"
         },
         {
           "type": "FIELD",
@@ -422,12 +422,12 @@
           "name": "constructors",
           "content": {
             "type": "SYMBOL",
-            "name": "variant_constructors"
+            "name": "enum_constructors"
           }
         }
       ]
     },
-    "variant_constructors": {
+    "enum_constructors": {
       "type": "SEQ",
       "members": [
         {
@@ -445,7 +445,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "variant_constructor"
+                      "name": "enum_constructor"
                     },
                     {
                       "type": "REPEAT",
@@ -458,7 +458,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "variant_constructor"
+                            "name": "enum_constructor"
                           }
                         ]
                       }
@@ -490,7 +490,7 @@
         }
       ]
     },
-    "variant_constructor": {
+    "enum_constructor": {
       "type": "SEQ",
       "members": [
         {

@@ -35,7 +35,7 @@ module.exports = grammar({
       $.filtermap_item,
       $.function_item,
       $.record_item,
-      $.variant_item,
+      $.enum_item,
       $.test_item,
       $.import,
     ),
@@ -92,23 +92,23 @@ module.exports = grammar({
       field('body', $.block),
     ),
 
-    variant_item: $ => seq(
-      'variant',
+    enum_item: $ => seq(
+      'enum',
       field('name', $.identifier),
       optional(field('parameters', $.type_parameters)),
       field(
         'constructors',
-        $.variant_constructors,
+        $.enum_constructors,
       ),
     ),
 
-    variant_constructors: $ => seq(
+    enum_constructors: $ => seq(
       '{',
-      trailingCommaSep($.variant_constructor),
+      trailingCommaSep($.enum_constructor),
       '}',
     ),
 
-    variant_constructor: $ => seq(
+    enum_constructor: $ => seq(
       field('name', $.identifier),
       optional(
         field(

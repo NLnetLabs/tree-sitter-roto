@@ -106,7 +106,7 @@
 
 "let" @keyword.storage
 "record" @keyword.storage.type
-"variant" @keyword.storage.type
+"enum" @keyword.storage.type
 
 "import" @keyword.control.import
 

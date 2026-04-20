@@ -1946,6 +1946,11 @@
     }
   },
   {
+    "type": "never",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "not_expression",
     "named": true,
     "fields": {},
@@ -2974,6 +2979,10 @@
     }
   },
   {
+    "type": "!",
+    "named": false
+  },
+  {
     "type": "!=",
     "named": false
   },
@@ -3143,14 +3152,6 @@
   },
   {
     "type": "match",
-    "named": false
-  },
-  {
-    "type": "never",
-    "named": true
-  },
-  {
-    "type": "not",
     "named": false
   },
   {

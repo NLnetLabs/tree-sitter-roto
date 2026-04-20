@@ -204,7 +204,7 @@ module.exports = grammar({
     )),
 
     not_expression: $ => prec(5, seq(
-      'not',
+      '!',
       $._expression,
     )),
 

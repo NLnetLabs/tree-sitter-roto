@@ -63,6 +63,7 @@
   ">="
   "<="
   "?"
+  "!"
 ] @operator
 
 [
@@ -115,8 +116,6 @@
 ; "std" @keyword
 ; "super" @keyword
 ; "pkg" @keyword
-
-"not" @keyword.operator
 
 (string_literal) @string
 

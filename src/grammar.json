@@ -1414,7 +1414,7 @@
               "members": [
                 {
                   "type": "STRING",
-                  "value": "|"
+                  "value": "if"
                 },
                 {
                   "type": "SYMBOL",

@@ -282,3 +282,45 @@ import foo.{bar.fn1, baz.{fn2, fn3}};
               (identifier))
             (import_path
               (identifier))))))))
+
+=====
+Const
+=====
+
+const FOO: u32 = 10;
+
+---
+
+(source_file
+  (const_item
+    (identifier)
+    (type_name
+      (path
+        (identifier)))
+    (integer_literal)))
+
+=============
+Complex Const
+=============
+
+const FOO: u32 = {
+  let a = 10;
+  a + 2
+};
+
+---
+
+(source_file
+  (const_item
+    (identifier)
+    (type_name
+      (path
+        (identifier)))
+    (block
+      (let_statement
+        (identifier)
+        (integer_literal))
+      (binary_expression
+        (path
+          (identifier))
+        (integer_literal)))))

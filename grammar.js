@@ -34,6 +34,7 @@ module.exports = grammar({
     _declaration: $ => choice(
       $.filtermap_item,
       $.function_item,
+      $.const_item,
       $.record_item,
       $.enum_item,
       $.test_item,
@@ -84,6 +85,16 @@ module.exports = grammar({
       field('parameters', $.parameter_list),
       optional(seq('->', field("return_type", $._type))),
       field('body', $.block),
+    ),
+
+    const_item: $ => seq(
+      'const',
+      field('name', $.identifier),
+      ':',
+      field('type', $._type),
+      '=',
+      field('value', $._expression),
+      ';'
     ),
 
     test_item: $ => seq(
@@ -175,6 +186,7 @@ module.exports = grammar({
       $.call_expression,
       $.path,
       $.access_expression,
+      $.block,
       $.record_expression,
       $.typed_record_expression,
       $.list_expression,
@@ -264,8 +276,8 @@ module.exports = grammar({
       optional(seq('if', $._expression)),
       '=>',
       field('value', choice(
-        seq($.block, optional(',')),
-        seq($._expression, ','),
+        prec(1, seq($.block, optional(','))),
+        prec(0, seq($._expression, ',')),
       )),
     ),
 
@@ -274,8 +286,8 @@ module.exports = grammar({
       optional(seq('|', $._expression)),
       '->',
       field('value', choice(
-        seq($.block, optional(',')),
-        seq($._expression, optional(',')),
+        prec(1, seq($.block, optional(','))),
+        prec(0, seq($._expression, ',')),
       )),
     ),
 

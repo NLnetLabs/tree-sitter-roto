@@ -81,7 +81,34 @@ fn foo() {
     (identifier)
     (parameter_list)
     (block
-      (string_literal))))
+      (string_literal
+        (string_start)
+        (string_content)
+        (string_end)))))
+
+====================
+String Interpolation
+====================
+
+fn foo() {
+	"hello {world}!"
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameter_list)
+    (block
+      (string_literal
+        (string_start)
+        (string_content)
+        (interpolation
+          (path
+            (identifier)))
+        (string_content)
+        (string_end)))))
 
 ====
 Path
@@ -479,11 +506,17 @@ fn foo() {
           (call_expression
             (path
               (identifier))
-            (string_literal))
+            (string_literal
+              (string_start)
+              (string_content)
+              (string_end)))
           (call_expression
             (path
               (identifier))
-            (string_literal)))))))
+            (string_literal
+              (string_start)
+              (string_content)
+              (string_end))))))))
 
 =======================
 While without semicolon
@@ -670,10 +703,10 @@ fn foo() {
     (parameter_list)
     (block
       (list_expression
-      (integer_literal)
-      (integer_literal)
-      (integer_literal)
-      (integer_literal)))))
+        (integer_literal)
+        (integer_literal)
+        (integer_literal)
+        (integer_literal)))))
 
 ========
 For loop
@@ -693,13 +726,19 @@ fn foo() {
     (parameter_list)
     (block
       (for_expression
-      (identifier)
-      (list_expression
-        (string_literal)
-        (string_literal))
-      (block
-        (call_expression
-          (path
-            (identifier))
-          (path
-            (identifier))))))))
+        (identifier)
+        (list_expression
+          (string_literal
+            (string_start)
+            (string_content)
+            (string_end))
+          (string_literal
+            (string_start)
+            (string_content)
+            (string_end)))
+        (block
+          (call_expression
+            (path
+              (identifier))
+            (path
+              (identifier))))))))

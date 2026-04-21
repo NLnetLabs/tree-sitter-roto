@@ -118,6 +118,7 @@
 ; "pkg" @keyword
 
 (string_literal) @string
+(escape_sequence) @constant.character.escape
 
 (unit_literal) @constant.builtin
 (boolean_literal) @constant.builtin.boolean

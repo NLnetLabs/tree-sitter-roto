@@ -1,0 +1,72 @@
+
+<!doctype HTML>
+<head>
+  <title>Tree-sitter Highlighting</title>
+  <style>
+    body {
+      font-family: monospace
+    }
+    .line-number {
+      user-select: none;
+      text-align: right;
+      color: rgba(27,31,35,.3);
+      padding: 0 10px;
+    }
+    .line {
+      white-space: pre;
+    }
+  </style>
+  <style>
+    .attribute { font-style: italic;color: #af0000; }
+    .comment { font-style: italic;color: #8a8a8a; }
+    .constant { color: #875f00; }
+    .constant.builtin { font-weight: bold;color: #875f00; }
+    .constructor { color: #af8700; }
+    .function { color: #005fd7; }
+    .function.builtin { font-weight: bold;color: #005fd7; }
+    .keyword { color: #5f00d7; }
+    .module { color: #af8700; }
+    .number { font-weight: bold;color: #875f00; }
+    .operator { font-weight: bold;color: #4e4e4e; }
+    .property { color: #af0000; }
+    .property.builtin { font-weight: bold;color: #af0000; }
+    .punctuation { color: #4e4e4e; }
+    .punctuation.bracket { color: #4e4e4e; }
+    .punctuation.delimiter { color: #4e4e4e; }
+    .punctuation.special { color: #4e4e4e; }
+    .string { color: #008700; }
+    .string.special { color: #008787; }
+    .tag { color: #000087; }
+    .type { color: #005f5f; }
+    .type.builtin { font-weight: bold;color: #005f5f; }
+    .variable { color: #d0d0d0; }
+    .variable.builtin { font-weight: bold;color: #d0d0d0; }
+    .variable.parameter { text-decoration: underline;color: #d0d0d0; }
+  </style>
+
+</head>
+<body>
+
+<table>
+<tr><td class=line-number>1</td><td class=line><span style='color: #005fd7'>fn</span> <span style='color: #005fd7'>main</span><span style='color: #4e4e4e'>(</span><span style='color: #4e4e4e'>)</span> <span style='color: #4e4e4e'>{</span>
+</td></tr>
+<tr><td class=line-number>2</td><td class=line>    <span style='color: #5f00d7'>let</span> <span style='color: #d0d0d0'>name</span> <span style='font-weight: bold;color: #4e4e4e'>=</span><span style='color: #008700'> &quot;Terts&quot;</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>3</td><td class=line>    <span style='color: #5f00d7'>let</span> <span style='color: #d0d0d0'>number</span><span style='color: #4e4e4e'>:</span> <span style='color: #005f5f'><span style='font-weight: bold;color: #005f5f'>i32</span></span> <span style='font-weight: bold;color: #4e4e4e'>=</span> <span style='color: #875f00'>150</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>4</td><td class=line>    <span style='color: #005fd7'>print</span><span style='color: #4e4e4e'>(</span><span style='color: #008700'>f&quot;Hello <span style='color: #4e4e4e'>{</span><span style='color: #d0d0d0'>name</span><span style='color: #4e4e4e'>}</span>!&quot;</span><span style='color: #4e4e4e'>)</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>5</td><td class=line>    <span style='color: #005fd7'>print</span><span style='color: #4e4e4e'>(</span><span style='color: #008700'>f&quot;Your number is <span style='color: #4e4e4e'>{</span><span style='color: #d0d0d0'>number</span><span style='color: #4e4e4e'>}</span>!&quot;</span><span style='color: #4e4e4e'>)</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>6</td><td class=line>    <span style='color: #005fd7'>print</span><span style='color: #4e4e4e'>(</span><span style='color: #008700'>f&quot;And <span style='color: #4e4e4e'>{</span><span style='color: #d0d0d0'>number</span><span style='color: #4e4e4e'>}</span> multiplied by 2 is <span style='color: #4e4e4e'>{</span><span style='color: #875f00'>2</span> <span style='font-weight: bold;color: #4e4e4e'>*</span> <span style='color: #d0d0d0'>number</span><span style='color: #4e4e4e'>}</span>.&quot;</span><span style='color: #4e4e4e'>)</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>7</td><td class=line>    <span style='color: #005fd7'>print</span><span style='color: #4e4e4e'>(</span><span style='color: #008700'>f&quot;This is a string with <span style='color: #4e4e4e'>{</span><span style='color: #008700'> f&quot;another string which prints <span style='color: #4e4e4e'>{</span><span style='font-weight: bold;color: #875f00'>true</span><span style='color: #4e4e4e'>}</span>&quot;</span> <span style='color: #4e4e4e'>}</span>, isn&#39;t that wonderful?&quot;</span><span style='color: #4e4e4e'>)</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>8</td><td class=line>    <span style='color: #005fd7'>print</span><span style='color: #4e4e4e'>(</span><span style='color: #008700'>f&quot;This is on line <span style='color: #4e4e4e'>{</span> <span style='color: #875f00'>1</span> <span style='color: #4e4e4e'>}</span><span style='color: #875f00'>\n</span>And this one line <span style='color: #4e4e4e'>{</span> <span style='color: #875f00'>2</span> <span style='color: #4e4e4e'>}</span>&quot;</span><span style='color: #4e4e4e'>)</span><span style='color: #4e4e4e'>;</span>
+</td></tr>
+<tr><td class=line-number>9</td><td class=line><span style='color: #4e4e4e'>}</span>
+</td></tr>
+</table>
+
+</body>
+

@@ -8,7 +8,14 @@
 // @ts-check
 
 module.exports = grammar({
-  name: "roto",
+  name: 'roto',
+
+  externals: $ => [
+    $.string_start,
+    $._string_content,
+    $.escape_interpolation,
+    $.string_end,
+  ],
 
   extras: $ => [
     /\s/,
@@ -83,7 +90,7 @@ module.exports = grammar({
       'fn',
       field('name', $.identifier),
       field('parameters', $.parameter_list),
-      optional(seq('->', field("return_type", $._type))),
+      optional(seq('->', field('return_type', $._type))),
       field('body', $.block),
     ),
 
@@ -305,7 +312,7 @@ module.exports = grammar({
     access_expression: $ => prec(7, seq($._expression, '.', $.identifier)),
 
     call_expression: $ => prec(6, seq(
-      field("function", $._expression),
+      field('function', $._expression),
       '(',
       trailingCommaSep($._expression),
       ')',
@@ -365,11 +372,38 @@ module.exports = grammar({
       repeat(seq(':', /[0-9A-Fa-f]/)),
     )),
 
-    string_literal: $ => token(seq(
-      '"',
-      /[^\"]*/,
-      '"',
-    )),
+    string_literal: $ => seq(
+      $.string_start,
+      repeat(choice($.string_content, $.interpolation)),
+      $.string_end,
+    ),
+
+    string_content: $ => seq(
+      choice(
+        $.escape_interpolation,
+        $.escape_sequence,
+        $._string_content,
+      ),
+    ),
+
+    interpolation: $ => seq(
+      '{',
+      field('expression', $._expression),
+      '}',
+    ),
+
+    escape_sequence: _ => token.immediate(prec(1, seq(
+      '\\',
+      choice(
+        '\n',
+        '\\',
+        't',
+        'n',
+        'r',
+        /u\{[a-fA-F\d]+\}/,
+        /x[a-fA-F\d]{2}/,
+      ),
+    ))),
 
     asn_literal: $ => /AS[0-9]+/,
 

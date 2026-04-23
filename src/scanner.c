@@ -44,7 +44,7 @@ bool tree_sitter_roto_external_scanner_scan(void *payload, TSLexer *lexer, const
     // printf("ESCAPE_INTERPOLATION: %d\n", valid_symbols[ESCAPE_INTERPOLATION]);
     // printf("STRING_CONTENT: %d\n", valid_symbols[STRING_CONTENT]);
 
-    if (valid_symbols[STRING_END]) {
+    if (valid_symbols[STRING_END] && scanner->delimiters.size > 0) {
         if (lexer->lookahead == '"') {
             array_pop(&scanner->delimiters);
             advance(lexer);
@@ -87,7 +87,7 @@ bool tree_sitter_roto_external_scanner_scan(void *payload, TSLexer *lexer, const
         }
     }
 
-    if (valid_symbols[STRING_CONTENT]) {
+    if (valid_symbols[STRING_CONTENT] && scanner->delimiters.size > 0) {
         Delimiter *delimiter = array_back(&scanner->delimiters);
 
         bool has_advanced = false;
